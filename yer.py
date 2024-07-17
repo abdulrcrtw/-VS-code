@@ -1,4 +1,3 @@
-i = 1
-while i <= 10:
-    print(i * "*")
-    i = i + 1 
+names = ["John", "James", "Isaac", "Rachel"]
+names[0] = "Gabby"
+print(names[0:3])
