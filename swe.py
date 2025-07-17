@@ -1,43 +1,54 @@
-print("Welcome to my job interview")
+import random 
 
-job = input("What kind of job are u looking for: ")
-print(job)
-if job != "Adidas":
-    print("Sorry we are not the right place for you but carry on with the interview we would like to see how bad you are ")
-else:
-    print("Very well then u can now proceed with the interview! ")
-score = 0
 
-answer = input("How many kits in the premier league does adidas manufacture? ")
-if answer == "Five":
-    print("Correct ")
-    score += 1 
-else:
-    print("Wrong! Adidas does not manufacture " + answer + " kits we only manufacture Five ") 
-
-answer = input("Where does the name adidas originate from? ")
-if answer == "From the name of the original creator of the company ":
-    print("Correct ")
-    score += 1
-else:
-    print("Wrong! Adidas was formed from the name Addidasler the original creator and owner of the company ")
-
-answer = input("Which country does the company originate from ")
-if answer == "Germany":
-    print("Correct ")
-    score += 1 
-else: 
-    print("Wrong! The company originally originates from germany ")
+def roll():
+    min_value = 1
+    max_value = 6 
+    return random.randint(min_value, max_value)
     
-answer = input("Who is adidas main competitor in every sport ")
-if answer == "Puma":
-    print("Correct nike is not regarded as a competitor but as a watchdog to our greatness ")
-    score += 1 
-else : 
-    print("Wrong! nike is not regarded as a competitor but as a watchdog to our greatness ")
 
-print("You got " + str(score) + " questions correctly ")
-if score != "Two":
-    print("You have failed the interview seek mykhalo mudryk as help ")
-else:
-    print("Welcoe to adidas")
+
+while True:
+    players = input("Enter the number of players (2 - 4 ): ")
+    if players.isdigit():
+        players = int(players)
+        if 2 <= players <= 4:
+            break
+        else:
+            print("Must be between 2 - 4 players ")
+    else:
+        print("Invalid try again ")
+        
+max_score = 50 
+player_scores = [0 for _ in range(players)]
+
+while max(player_scores) < max_score:
+    for player_idx in range(players): 
+        print("\nPlayer number", player_idx + 1, "turn has just started!\n")
+        current_score = 0 
+        
+    while True:
+        should_roll = input("Would you like to roll the dice? (y/n): ")
+        if should_roll != "y":
+            break
+        
+        value = roll()
+        print("You rolled a", value)
+        
+        if value == 1:
+            print("Oh no! You rolled a 1. Turn over, no points added.")
+            current_score = 0
+            break 
+        else:
+            current_score += value 
+            print("Current turn score:", current_score)
+    
+    player_scores[player_idx] += current_score
+    print(f"Total score for player {player_idx + 1}: {player_scores[player_idx]}")
+    
+    if player_scores[player_idx] >= max_score:
+        print(f"\nPlayer {player_idx + 1} wins with a score of {player_scores[player_idx]}!") 
+    
+    else:
+        continue
+    break            
